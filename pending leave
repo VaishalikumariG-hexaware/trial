@@ -1,0 +1,12 @@
+public class LeaveDetailsRestTest {
+
+    @Test
+    public void testLeaveDetailsListId() throws AssertionError, URISyntaxException {
+        LeaveDetails[] res = given().accept(ContentType.JSON).when()
+				.get(CommonUtil.getURI("/api/LeaveDetails/pendingLeave/2000")).getBody().as(LeaveDetails[].class);
+				LeaveDetails lv = res[1];
+                assertEquals(3000,lv.getEmpId());
+				assertEquals("PENDING",lv.getLeaveStatus());
+    }
+
+}
