@@ -1,0 +1,38 @@
+@Test
+ public final void testapplyLeave(@Mocked final EmployeeDAO dao,@Mocked final LeaveDAO ldao) throws ParseException
+ {
+      final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+     final LeaveDetails l3000 = new LeaveDetails(1, 2, sdf.parse("2018-01-01"), sdf.parse("2018-01-02"),
+                            LeaveType.EL, LeaveStatus.PENDING, "sick", sdf.parse("2018-01-01"), "Happy", 3000);
+  final List<LeaveDetails> l=new ArrayList<LeaveDetails>();
+  l.add(l3000);
+  final Employee emp = new Employee(3000, "Sruthi", "SruthiM@hexaware.com", 913456789, sdf.parse("2017-12-27"), 2000,
+                               "HEXAVARSITY", 20);
+    new Expectations(){{
+         dao.find(3000); result = emp;
+      ldao.findLeaveHistory(3000);result =l;
+    ldao.applyLeave(1, sdf.parse("2018-02-23"), sdf.parse("2018-02-23"), "sick", 3000);result =1;
+    dao.updateLeaveBal(19,3000);result=1;}
+    };
+       new MockUp<LeaveDetails>() {
+        @Mock
+        LeaveDAO ldao() {
+        return ldao;
+      }
+      };
+    new MockUp<Employee>() {
+        @Mock
+        EmployeeDAO dao() {
+        return dao;
+      }
+      };
+     
+     
+     
+     Employee.applyLeave(1, sdf.parse("2018-02-23"), sdf.parse("2018-02-23"), "sick", 3000);
+ }
+
+
+
+}
+
