@@ -1,0 +1,19 @@
+@Test
+	public void testApproveDeny() throws AssertionError, URISyntaxException {
+
+		String res = given().accept(ContentType.JSON).contentType("application/json")
+				.body("{\"leaveId\":\"1\",\"leaveStatus\":\"APPROVED\",\"leaveComments\":\"Enjoy\",\"empId\":\"2001\"}")
+				.when().post(CommonUtil.getURI("/api/LeaveDetails/approveorDeny")).getBody().asString();
+		assertEquals("No change in status and the comment has been recorded", res);
+
+		String res1 = given().accept(ContentType.JSON).contentType("application/json")
+				.body("{\"leaveId\":\"13\",\"leaveStatus\":\"DENIED\",\"leaveComments\":\"Enjoy\",\"empId\":\"1000\"}")
+				.when().post(CommonUtil.getURI("/api/LeaveDetails/approveorDeny")).getBody().asString();
+		assertEquals("The status and leave Balance has been updated", res1);
+
+		String res2 = given().accept(ContentType.JSON).contentType("application/json")
+				.body("{\"leaveId\":\"3\",\"leaveStatus\":\"DENIED\",\"leaveComments\":\"Enjoy\",\"empId\":\"1000\"}")
+				.when().post(CommonUtil.getURI("/api/LeaveDetails/approveorDeny")).getBody().asString();
+		assertEquals("The status and leave Balance is updated", res2);
+
+	}
