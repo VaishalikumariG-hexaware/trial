@@ -1,0 +1,1 @@
+ curl -vvv -H "Accept:application/json" -X POST -H "Content-Type:application/json" -d '{"noOfDays":"1","startDate":"2018-05-10","endDate":"2018-05-10","leaveReason":"sick","empId":"2000"}' "http://localhost:8080/ftp17/api/employees/applyforleave"
