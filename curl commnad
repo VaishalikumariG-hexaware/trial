@@ -1,0 +1,1 @@
++curl -vvv -H "Accept:application/json" -X POST -H "Content-Type:application/json" -d '{"leaveId":"2","leaveStatus":"APPROVED","leaveComments":"fine","empId":2000}' "http://localhost:8080/ftp17/api/LeaveDetails/approveorDeny"
