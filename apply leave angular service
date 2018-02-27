@@ -1,0 +1,7 @@
+applyLeave(model:LeaveDetails):Observable<String>{
+        
+        alert(model.noOfDays + " " +model.startDate + " " +model.endDate + " " +model.leaveReason);
+        return this.http.post('http://localhost:8080/ftp17/api/employees/applyforleave/',model) 
+         .map(response=>response.text())
+         .catch((error:any) => Observable.throw(error.toString() || 'Server error'));
+       }
